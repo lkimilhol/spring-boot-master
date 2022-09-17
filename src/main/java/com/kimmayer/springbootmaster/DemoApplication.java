@@ -1,4 +1,4 @@
-package com.kimmayer.springbootmaster.demo;
+package com.kimmayer.springbootmaster;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
