@@ -2,6 +2,7 @@ package com.kimmayer.springbootmaster.reactive;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
@@ -22,6 +23,12 @@ public class ServerController {
     @GetMapping(value = "/served-dishes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<Dish> deliverDishes() {
         return this.kitchen.getDishes()
-                .map(dish -> Dish.deliver(dish));
+                .map(Dish::deliver);
+    }
+
+    @PostMapping(value = "/create-item", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    String createItem() {
+        this.kitchen.createItem();
+        return "OK";
     }
 }
