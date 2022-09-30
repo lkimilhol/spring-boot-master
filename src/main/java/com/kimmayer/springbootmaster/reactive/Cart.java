@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+
 public class Cart {
-    private String id;
+    private @Id String id;
     private List<CarItem> carItems;
 
     private Cart() {}

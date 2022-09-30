@@ -2,9 +2,11 @@ package com.kimmayer.springbootmaster.reactive;
 
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+
 public class Item {
 
-    private String id;
+    private @Id String id;
     private String name;
     private double price;
 
