@@ -2,10 +2,12 @@ package com.kimmayer.springbootmaster.reactive;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class ServerController {
@@ -27,8 +29,12 @@ public class ServerController {
     }
 
     @PostMapping(value = "/create-item", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    String createItem() {
-        this.kitchen.createItem();
-        return "OK";
+    Mono<Item> createItem() {
+        return this.kitchen.createItem();
+    }
+
+    @GetMapping(value = "/get-item/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Mono<Item> getItem(@PathVariable String id) {
+        return this.kitchen.getItem(id);
     }
 }

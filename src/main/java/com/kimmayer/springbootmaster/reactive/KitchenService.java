@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kimmayer.springbootmaster.repository.ItemRepository;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class KitchenService {
@@ -27,8 +28,8 @@ public class KitchenService {
                 .delayElements(Duration.ofMillis(250));
     }
 
-    void createItem() {
-        itemRepository.save(new Item("Alf alarm clock", 19.99));
+    Mono<Item> createItem() {
+        return itemRepository.save(new Item("Alf alarm clock", 19.99));
     }
 
     /**
@@ -44,4 +45,7 @@ public class KitchenService {
             new Dish("Sweet & sour beef"));
     private final Random picker = new Random();
 
+    public Mono<Item> getItem(String id) {
+        return itemRepository.findById(id);
+    }
 }
